@@ -5102,7 +5102,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1027402013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1173369001}
+        m_TargetAssemblyTypeName: UIPopupTower, Assembly-CSharp
+        m_MethodName: OnClickEventTowerUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1027402013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6020,6 +6032,7 @@ MonoBehaviour:
   textRange: {fileID: 905707625}
   textLevel: {fileID: 184241696}
   towerAttackRange: {fileID: 1404747741}
+  buttonUpgrade: {fileID: 1027402012}
 --- !u!114 &1173369002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9169,8 +9182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213eb14c1cb2f6249907eef5af33ca10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerSpawner
-  towerPrefab: {fileID: 3410157920847261817, guid: 1b648ca9e15950b4f91f4f3946565445, type: 3}
-  towerBuildGold: 50
+  towerTemplate: {fileID: 11400000, guid: 19c0865543902f641a25bb9a9dd92751, type: 2}
   playerGold: {fileID: 1040112993}
   enemySpawner: {fileID: 1658690916}
 --- !u!4 &1846206619

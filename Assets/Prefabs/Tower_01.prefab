@@ -138,11 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e7aa8bfc6a41346859516ef915d882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerWeapon
+  towerTemplate: {fileID: 11400000, guid: 19c0865543902f641a25bb9a9dd92751, type: 2}
   spawnPoint: {fileID: 8007974660331896948}
   projectilePrefab: {fileID: 7540095173125229477, guid: 6cba89a452593cc48a0bb6746d8968cc, type: 3}
-  attackRate: 0.5
-  attackRange: 2
-  attackDamage: 1
 --- !u!65 &4785315605813924423
 BoxCollider:
   m_ObjectHideFlags: 0
