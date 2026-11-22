@@ -5,6 +5,8 @@ public class ObjectDetector : MonoBehaviour
 {
     [SerializeField]
     private TowerSpawner towerSpawner;
+    [SerializeField]
+    private UIPopupTower uiPopupTower;
 
     private Camera mainCamera;
     private Vector2 screenPoint;
@@ -38,8 +40,13 @@ public class ObjectDetector : MonoBehaviour
             // 광선과 충돌한 오브젝트의 태그가 "Tile"이면
             if (hit.transform.CompareTag("Tile"))
             {
-                // 타워를 생성하는 SpawnTower() 메소드 호출
+                // 타워를 생성하는 TrySpawnTower() 메소드 호출
                 towerSpawner.TrySpawnTower(hit.transform);
+            }
+            // 타워를 선택하면 해당 타워 정보를 출력하는 타워 Popup UI On
+            else if (hit.transform.CompareTag("Tower"))
+            {
+                uiPopupTower.OnPopup(hit.transform);
             }
         }
     }
