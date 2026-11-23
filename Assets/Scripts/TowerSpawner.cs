@@ -8,8 +8,8 @@ public class TowerSpawner : MonoBehaviour
     private PlayerGold playerGold;          // 타워 건설 시 골드 감소 처리
     [SerializeField]
     private EnemySpawner enemySpawner;      // 현재 맵에 존재하는 적 리스트 정보를 얻기 위해..
-    //[SerializeField]
-    //private SystemTextViewer systemTextViewer;  // 돈 부족, 건설 불가와 같은 시스템 메시지 출력
+    [SerializeField]
+    private SystemTextViewer systemTextViewer;  // 돈 부족, 건설 불가와 같은 시스템 메시지 출력
 
     public void TrySpawnTower(Transform tileTransform)
     {
@@ -18,7 +18,7 @@ public class TowerSpawner : MonoBehaviour
         if (towerTemplate.weapon[0].cost > playerGold.CurrentGold)
         {
             // 골드가 부족해서 타워 건설이 불가능할 때 출력
-            //systemTextViewer.PrintText(MESSAGE.MONEY);
+            systemTextViewer.PrintText(MESSAGE.MONEY);
             return;
         }
 
@@ -28,7 +28,7 @@ public class TowerSpawner : MonoBehaviour
         if (tile.IsBuildTower == true)
         {
             // 현재 위치에 타워 건설이 불가능할 때 출력
-            //systemTextViewer.PrintText(MESSAGE.BUILD);
+            systemTextViewer.PrintText(MESSAGE.BUILD);
             return;
         }
 

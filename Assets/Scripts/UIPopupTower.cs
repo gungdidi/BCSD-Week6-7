@@ -19,8 +19,8 @@ public class UIPopupTower : MonoBehaviour
     private TowerAttackRange towerAttackRange;
     [SerializeField]
     private Button buttonUpgrade;
-    //[SerializeField]
-    //private SystemTextViewer systemTextViewer;
+    [SerializeField]
+    private SystemTextViewer systemTextViewer;
 
     private TowerWeapon currentTower;
 
@@ -84,7 +84,7 @@ public class UIPopupTower : MonoBehaviour
         else
         {
             // 타워 업그레이드에 필요한 비용이 부족하다고 출력
-            //systemTextViewer.PrintText(MESSAGE.MONEY);
+            systemTextViewer.PrintText(MESSAGE.MONEY);
         }
     }
 
