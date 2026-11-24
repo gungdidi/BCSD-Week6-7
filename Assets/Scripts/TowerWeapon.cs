@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public enum WeaponState { SearchClosestTarget = 0, AttackToTarget }
+public enum WeaponType { Cannon = 0, }
+public enum WeaponState { SearchClosestTarget = 0, TryAttackCannon }
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class TowerWeapon : MonoBehaviour
     private TowerTemplateSO towerTemplate;          // 타워 정보 (공격력, 공격 속도 등)
     [SerializeField]
     private Transform spawnPoint;               // 발사체 생성 위치
+    [SerializeField]
+    private WeaponType type;                    // 무기 속성 설정
+
+    [Header("Cannon")]
     [SerializeField]
     private GameObject projectilePrefab;        // 발사체 프리팹
 
@@ -72,45 +77,26 @@ public class TowerWeapon : MonoBehaviour
 
     private IEnumerator SearchClosestTarget()
     {
-        // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
-        float closestDistSqr = Mathf.Infinity;
+        
 
         while (true)
         {
-            // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
-            for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
-            {
-                float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
-                // 현재 검사중인 적과의 거리가 공격 범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
-                if (distance <= towerTemplate.weapon[level].range && distance <= closestDistSqr)
-                {
-                    closestDistSqr = distance;
-                    attackTarget = enemySpawner.EnemyList[i].transform;
-                }
-            }
+            // 현재 타워에 가장 가까이 있는 공격 대상(적) 탐색
+            attackTarget = FindClosestTarge();
 
-            if (attackTarget != null) ChangeState(WeaponState.AttackToTarget);
+            if (attackTarget != null) ChangeState(WeaponState.TryAttackCannon);
 
             yield return null;
         }
     }
 
-    private IEnumerator AttackToTarget()
+    private IEnumerator TryAttackCannon()
     {
         while (true)
         {
-            // 1. target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
-            if (attackTarget == null)
+            // target을 공격하는게 가능한지 검사
+            if ( IsPossibleToAttackTarget() == false )
             {
-                ChangeState(WeaponState.SearchClosestTarget);
-                break;
-            }
-
-            // 2. target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
-            float distance = Vector3.Distance(attackTarget.position, transform.position);
-            if (distance > towerTemplate.weapon[level].range)
-            {
-                attackTarget = null;
                 ChangeState(WeaponState.SearchClosestTarget);
                 break;
             }
@@ -156,6 +142,47 @@ public class TowerWeapon : MonoBehaviour
         ownerTile.IsBuildTower = false;
         // 타워 파괴
         Destroy(gameObject);
+    }
+
+    private Transform FindClosestTarge() // t 뺴먹음
+    {
+        // 제일 가까이 있는 적을 찾기 위해 최초 거리를 최대한 크게 설정
+        float closestDistSqr = Mathf.Infinity;
+
+        // EnemySpawner의 EnemyList에 있는 현재 맵에 존재하는 모든 적 검사
+        for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
+        {
+            float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
+            // 현재 검사중인 적과의 거리가 공격 범위 내에 있고, 현재까지 검사한 적보다 거리가 가까우면
+            if (distance <= towerTemplate.weapon[level].range && distance <= closestDistSqr)
+            {
+                closestDistSqr = distance;
+                attackTarget = enemySpawner.EnemyList[i].transform;
+            }
+        }
+
+        return attackTarget;
+    }
+
+    private bool IsPossibleToAttackTarget()
+    {
+        // 1. target이 있는지 검사 (다른 발사체에 의해 제거, Goal 지점까지 이동해 삭제 등)
+        if (attackTarget == null)
+        {
+            return false;
+            
+        }
+
+        // 2. target이 공격 범위 안에 있는지 검사 (공격 범위를 벗어나면 새로운 적 탐색)
+        float distance = Vector3.Distance(attackTarget.position, transform.position);
+        if (distance > towerTemplate.weapon[level].range)
+        {
+            attackTarget = null;
+
+            return false;
+        }
+
+        return true;
     }
 }
 
