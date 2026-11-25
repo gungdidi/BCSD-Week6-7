@@ -9300,11 +9300,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1846206618}
         m_TargetAssemblyTypeName: TowerSpawner, Assembly-CSharp
         m_MethodName: ReadyToSpawnTower
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9809,7 +9809,6 @@ MonoBehaviour:
       m_Calls: []
   m_text: '$200
 
-
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10043,7 +10042,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213eb14c1cb2f6249907eef5af33ca10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerSpawner
-  towerTemplate: {fileID: 11400000, guid: 19c0865543902f641a25bb9a9dd92751, type: 2}
+  towerTemplate:
+  - {fileID: 11400000, guid: 19c0865543902f641a25bb9a9dd92751, type: 2}
+  - {fileID: 11400000, guid: 37922318251a0504eae4a34b4ef195c6, type: 2}
   playerGold: {fileID: 1040112993}
   enemySpawner: {fileID: 1658690916}
   systemTextViewer: {fileID: 20702565}
@@ -10645,7 +10646,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1846206618}
         m_TargetAssemblyTypeName: TowerSpawner, Assembly-CSharp
         m_MethodName: ReadyToSpawnTower
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
